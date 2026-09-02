@@ -19,6 +19,12 @@
     { "manager": "Richie", "course": "COMM 4024", "days": "MW",  "start": "14:30", "end": "15:45", "room": "Surge Building 108B" },
     { "manager": "Richie", "course": "JMC 4274",  "days": "TR",  "start": "08:00", "end": "09:15", "room": "Center for the Arts 153" },
     { "manager": "Richie", "course": "CMST 3124", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Pamplin Hall 1010" },
-    { "manager": "Richie", "course": "MKTG 3134", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Litton-Reaves Hall 280" }
+    { "manager": "Richie", "course": "MKTG 3134", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Litton-Reaves Hall 280" },
+
+    { "manager": "Nate", "course": "CMST 4714", "days": "MWF", "start": "12:20", "end": "13:10", "room": "McBryde Hall 230" },
+    { "manager": "Nate", "course": "CMST 3064", "days": "MW",  "start": "14:30", "end": "15:45", "room": "USLB 312" },
+    { "manager": "Nate", "course": "MGT 2354",  "days": "TR",  "start": "11:00", "end": "12:15", "room": "DDS 240" },
+    { "manager": "Nate", "course": "CMST 3124", "days": "TR",  "start": "12:30", "end": "13:45", "room": "McBryde Hall 238" },
+    { "manager": "Nate", "course": "MGT 3064",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Pamplin Hall 2028" }
   ]
 }
