@@ -55,6 +55,8 @@ One entry per class meeting pattern. A class that meets MWF is a single entry wi
 | CFA | Center for the Arts |
 | DDS | Data & Decision Sciences Building |
 | USLB | Undergraduate Science Laboratory Building |
+| SQUIR | Squires Student Center |
+| GLCDB | Graduate Life Center at Donaldson Brown |
 | MCB | McBryde Hall |
 | TORG | Torgersen Hall |
 | WMS | Williams Hall |

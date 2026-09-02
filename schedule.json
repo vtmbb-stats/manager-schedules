@@ -25,6 +25,10 @@
     { "manager": "Nate", "course": "CMST 3064", "days": "MW",  "start": "14:30", "end": "15:45", "room": "Undergraduate Science Laboratory Building 312" },
     { "manager": "Nate", "course": "MGT 2354",  "days": "TR",  "start": "11:00", "end": "12:15", "room": "Data & Decision Sciences Building 240" },
     { "manager": "Nate", "course": "CMST 3124", "days": "TR",  "start": "12:30", "end": "13:45", "room": "McBryde Hall 238" },
-    { "manager": "Nate", "course": "MGT 3064",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Pamplin Hall 2028" }
+    { "manager": "Nate", "course": "MGT 3064",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Pamplin Hall 2028" },
+
+    { "manager": "David", "course": "ECON 2005", "days": "MWF", "start": "11:15", "end": "12:05", "room": "Squires Student Center Auditorium" },
+    { "manager": "David", "course": "MATH 1025", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Online (Zoom)" },
+    { "manager": "David", "course": "MKTG 3104", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Graduate Life Center at Donaldson Brown" }
   ]
 }
