@@ -75,6 +75,9 @@ One entry per class meeting pattern. A class that meets MWF is a single entry wi
 | NCB | New Classroom Building |
 | DER | Derring Hall |
 | STEG | Steger Hall (STEG N = Steger Hall North) |
+| SMYTH | Smyth Hall |
+| SEITZ | Seitz Hall |
+| FRALN | Fralin Hall |
 
 After editing, commit and push (or edit on github.com) — GitHub Pages redeploys in
 about a minute, and viewers get the new data on their next load.

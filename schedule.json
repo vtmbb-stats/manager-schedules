@@ -1,7 +1,7 @@
 {
   "semester": "Fall 2026",
   "updated": "2026-09-02",
-  "note": "Full roster entered. Still TBD: Luke's rooms.",
+  "note": "",
   "managers": [
     { "name": "Richie" },
     { "name": "Baker" },
@@ -41,12 +41,12 @@
     { "manager": "Baker", "course": "ADS 5834",  "days": "TR",  "start": "14:00", "end": "15:15", "room": "Data & Decision Sciences Building 132" },
     { "manager": "Baker", "course": "CMDA 4864", "days": "MW",  "start": "16:00", "end": "17:15", "room": "New Classroom Building 230" },
 
-    { "manager": "Luke", "course": "STAT 4204", "days": "MWF", "start": "09:05", "end": "09:55", "room": "" },
-    { "manager": "Luke", "course": "STAT 3274", "days": "TR",  "start": "09:30", "end": "10:45", "room": "" },
-    { "manager": "Luke", "course": "ECON 2006", "days": "MWF", "start": "12:20", "end": "13:10", "room": "" },
-    { "manager": "Luke", "course": "STAT 3654", "days": "MWF", "start": "13:25", "end": "14:15", "room": "" },
-    { "manager": "Luke", "course": "STAT 4444", "days": "MW",  "start": "14:30", "end": "15:45", "room": "" },
-    { "manager": "Luke", "course": "STAT 4105", "days": "MW",  "start": "16:00", "end": "17:15", "room": "" },
+    { "manager": "Luke", "course": "STAT 4204", "days": "MWF", "start": "09:05", "end": "09:55", "room": "Hutcheson Hall 204" },
+    { "manager": "Luke", "course": "STAT 3274", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Smyth Hall 232" },
+    { "manager": "Luke", "course": "ECON 2006", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Torgersen Hall 1060" },
+    { "manager": "Luke", "course": "STAT 3654", "days": "MWF", "start": "13:25", "end": "14:15", "room": "Seitz Hall 300" },
+    { "manager": "Luke", "course": "STAT 4444", "days": "MW",  "start": "14:30", "end": "15:45", "room": "Hutcheson Hall 204" },
+    { "manager": "Luke", "course": "STAT 4105", "days": "MW",  "start": "16:00", "end": "17:15", "room": "Fralin Hall 002" },
 
     { "manager": "Jackson", "course": "ECON 2005", "days": "MWF", "start": "08:00", "end": "08:50", "room": "New Classroom Building 250" },
     { "manager": "Jackson", "course": "STAT 3005", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Litton-Reaves Hall 1870" },
