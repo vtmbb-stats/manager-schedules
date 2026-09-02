@@ -488,11 +488,11 @@
     });
     var detail=ui.sel?slotDetail(ui.sel):'<p class="muted" style="font-size:12.5px;margin:0">Click a slot for exactly who is free and who is in class.</p>';
     return chipBar()+finderForm()+
+      '<div class="panel" id="detail" style="margin-bottom:14px">'+detail+'</div>'+
       '<div class="board-frame"><div class="board-scroll"><div class="board">'+head+'<div class="board-body">'+cols+'</div></div></div></div>'+
       '<p class="legend"><span><i style="background:'+heatBg(1)+'"></i>everyone free</span>'+
       '<span><i style="background:'+heatBg(.5)+'"></i>about half</span>'+
-      '<span><i style="background:'+heatBg(0)+'"></i>nobody free</span></p>'+
-      '<div class="panel" id="detail" style="margin-top:14px">'+detail+'</div>';
+      '<span><i style="background:'+heatBg(0)+'"></i>nobody free</span></p>';
   }
   function slotDetail(key){
     var p=key.split("@"),dk=p[0],t=+p[1],mid=t+15;
