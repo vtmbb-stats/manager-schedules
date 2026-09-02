@@ -68,6 +68,7 @@ One entry per class meeting pattern. A class that meets MWF is a single entry wi
 | RAND | Randolph Hall |
 | ROB | Robeson Hall |
 | SHANK | Shanks Hall |
+| JCH | Cheatham Hall |
 | GOODW | Goodwin Hall |
 | DAVID | Davidson Hall |
 | HAHN | Hahn Hall |
