@@ -44,5 +44,23 @@ The page shows:
 One entry per class meeting pattern. A class that meets MWF is a single entry with
 `"days": "MWF"`. If a class meets at different times on different days, make two entries.
 
+**Rooms use full building names** (not HokieSpa abbreviations). Common ones:
+
+| Abbrev | Full name |
+|---|---|
+| PAM | Pamplin Hall |
+| HUTCH | Hutcheson Hall |
+| LITRV | Litton-Reaves Hall |
+| SURGE | Surge Building |
+| CFA | Center for the Arts |
+| MCB | McBryde Hall |
+| TORG | Torgersen Hall |
+| WMS | Williams Hall |
+| RAND | Randolph Hall |
+| GOODW | Goodwin Hall |
+| DAVID | Davidson Hall |
+| HAHN | Hahn Hall |
+| NCB | New Classroom Building |
+
 After editing, commit and push (or edit on github.com) — GitHub Pages redeploys in
 about a minute, and viewers get the new data on their next load.
