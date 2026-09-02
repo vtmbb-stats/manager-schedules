@@ -52,6 +52,13 @@
     { "manager": "Jackson", "course": "STAT 3005", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Litton-Reaves Hall 1870" },
     { "manager": "Jackson", "course": "ENGL 1105", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Whittemore Hall 281" },
     { "manager": "Jackson", "course": "FIN 2114",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Data & Decision Sciences Building 155" },
-    { "manager": "Jackson", "course": "ECON 2984", "days": "M",   "start": "18:00", "end": "18:50", "room": "Online (Zoom)" }
+    { "manager": "Jackson", "course": "ECON 2984", "days": "M",   "start": "18:00", "end": "18:50", "room": "Online (Zoom)" },
+
+    { "manager": "Korey", "course": "HTM 3424",  "days": "TR",  "start": "08:00", "end": "09:15", "room": "Pamplin Hall 2003" },
+    { "manager": "Korey", "course": "COMM 1004", "days": "M",   "start": "09:05", "end": "09:55", "room": "Data & Decision Sciences Building 155" },
+    { "manager": "Korey", "course": "GEOS 1034", "days": "TR",  "start": "12:30", "end": "13:45", "room": "New Classroom Building 260" },
+    { "manager": "Korey", "course": "JMC 2034",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Shanks Hall 043" },
+    { "manager": "Korey", "course": "FIN 2114",  "days": "MW",  "start": "16:00", "end": "17:15", "room": "Robeson Hall 112" },
+    { "manager": "Korey", "course": "COMM 1014", "days": "TR",  "start": "17:00", "end": "18:15", "room": "Torgersen Hall 2150" }
   ]
 }
