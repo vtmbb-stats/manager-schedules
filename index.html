@@ -535,7 +535,7 @@
     return '<p class="eyebrow">'+dl+' · '+fmt(t)+'–'+fmt(t+30)+'</p><div class="grid2">'+
       '<div><b class="muted" style="font-size:12px">FREE ('+free.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(free.reverse().join(", ")||"—")+'</p></div>'+
       '<div><b class="muted" style="font-size:12px">IN CLASS ('+busy.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(busy.join(", ")||"—")+'</p></div></div>'+
-      (trans.length?'<p style="margin:12px 0 0"><b style="font-size:12px;color:var(--tight)">NEEDS TRAVEL TIME ('+trans.length+')</b><br><span style="font-size:13px;line-height:1.9">'+trans.join(", ")+'</span></p>':'');
+      (trans.length?'<p style="margin:12px 0 0"><b style="font-size:12px;color:var(--tight)">NEEDS TRAVEL TIME ('+trans.length+')</b></p><div style="font-size:13px;line-height:1.7">'+trans.map(function(x){return '<div>'+x+'</div>';}).join("")+'</div>':'');
   }
   function finderForm(){
     var q=ui.q||(ui.q={day:"M",start:14*60,end:19*60,dur:60,need:0});
