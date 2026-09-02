@@ -53,6 +53,8 @@ One entry per class meeting pattern. A class that meets MWF is a single entry wi
 | LITRV | Litton-Reaves Hall |
 | SURGE | Surge Building |
 | CFA | Center for the Arts |
+| DDS | Data & Decision Sciences Building |
+| USLB | Undergraduate Science Laboratory Building |
 | MCB | McBryde Hall |
 | TORG | Torgersen Hall |
 | WMS | Williams Hall |
