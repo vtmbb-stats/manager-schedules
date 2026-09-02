@@ -44,6 +44,9 @@ The page shows:
 One entry per class meeting pattern. A class that meets MWF is a single entry with
 `"days": "MWF"`. If a class meets at different times on different days, make two entries.
 
+**Online classes:** synchronous (live) online classes count — enter them with
+`"room": "Online (Zoom)"`. Asynchronous online classes are left out entirely.
+
 **Rooms use full building names** (not HokieSpa abbreviations). Common ones:
 
 | Abbrev | Full name |
