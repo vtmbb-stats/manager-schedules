@@ -269,6 +269,7 @@
   function inkOn(hex){var c=hex.replace("#","");var r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);return (0.299*r+0.587*g+0.114*b)>145?"#241416":"#fff";}
   function mgr(id){return state.managers.filter(function(m){return m.id===id;})[0];}
   function byName(a,b){return a.name.localeCompare(b.name);}
+  function ordered(){return state.managers.slice();}   /* keep schedule.json order */
   function toLocalInput(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+"T"+pad(d.getHours())+":"+pad(d.getMinutes());}
   function fromLocalInput(v){var m=String(v).match(/(\d+)-(\d+)-(\d+)T(\d+):(\d+)/);return m?new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5]):new Date();}
   function prettyDate(s){var m=String(s||"").match(/(\d{4})-(\d{2})-(\d{2})/);if(!m)return "";
@@ -387,7 +388,7 @@
     var selMin=sel.getHours()*60+sel.getMinutes();
     var nowMin=real.getHours()*60+real.getMinutes();
 
-    var sorted=state.managers.slice().sort(byName);
+    var sorted=state.managers.slice();
     var inClass=[],free=[];
     sorted.forEach(function(m){
       var c=dk?classAt(m.id,dk,selMin):null;
@@ -431,7 +432,7 @@
     var ticks="";
     for(var t=LO;t<=HI;t+=30){var left=(t-LO)*GPX,hr=t%60===0;
       ticks+='<div class="gtick'+(hr?" hr":"")+'" style="left:'+left+'px">'+(hr?fmtS(t):"")+'</div>';}
-    var rows=state.managers.slice().sort(byName).map(function(m){
+    var rows=state.managers.slice().map(function(m){
       var blocks="";
       if(dk){
         pack(state.classes.filter(function(c){return c.mgr===m.id&&c.days.indexOf(dk)>=0;})
@@ -464,7 +465,7 @@
   /* ---------- FIND A WINDOW ---------- */
   function chipBar(){
     return '<div class="toolbar"><div class="chips">'+
-      state.managers.slice().sort(byName).map(function(m){
+      state.managers.slice().map(function(m){
         return '<span class="chip '+(ui.hidden[m.id]?"off":"on")+'" data-chip="'+m.id+'">'+
           '<span class="sw" style="background:'+m.color+'"></span>'+esc(m.name)+'</span>';
       }).join("")+
@@ -567,7 +568,7 @@
     }).join("");
   }
   function mgrDetailView(){
-    var sorted=state.managers.slice().sort(byName),m=ui.mgrView?mgr(ui.mgrView):sorted[0];
+    var sorted=state.managers.slice(),m=ui.mgrView?mgr(ui.mgrView):sorted[0];
     if(!m)return "";
     ui.mgrView=m.id;
     var cls=state.classes.filter(function(c){return c.mgr===m.id;});
@@ -596,7 +597,7 @@
 
   /* ---------- ALL CLASSES (read-only list) ---------- */
   function listView(){
-    var sorted=state.managers.slice().sort(byName);
+    var sorted=state.managers.slice();
     var groups=sorted.map(function(m){
       var cls=state.classes.filter(function(c){return c.mgr===m.id;}).sort(function(a,b){return a.start-b.start;});
       return '<div class="row" style="border-top:0;padding-bottom:2px"><span class="tick" style="background:'+m.color+'"></span>'+
