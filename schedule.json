@@ -1,0 +1,27 @@
+{
+  "semester": "Fall 2026",
+  "updated": "2026-09-02",
+  "note": "PLACEHOLDER DATA — send Baker the real manager schedules to replace this.",
+  "managers": [
+    { "name": "Aidan Reyes" },
+    { "name": "Bryce Coleman" },
+    { "name": "Isaac Nguyen" },
+    { "name": "Nate Fowler" },
+    { "name": "Maya Ellis" },
+    { "name": "Dev Patel" }
+  ],
+  "classes": [
+    { "manager": "Aidan Reyes",   "course": "JMC 2034",  "days": "MWF", "start": "09:05", "end": "09:55", "room": "Shanks 220" },
+    { "manager": "Aidan Reyes",   "course": "FIN 3144",  "days": "TR",  "start": "12:30", "end": "13:45", "room": "Pamplin 1020" },
+    { "manager": "Bryce Coleman", "course": "ACIS 4194", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Pamplin 3040" },
+    { "manager": "Bryce Coleman", "course": "MGT 3404",  "days": "MWF", "start": "11:15", "end": "12:05", "room": "Pamplin 2050" },
+    { "manager": "Isaac Nguyen",  "course": "CMDA 3606", "days": "TR",  "start": "14:00", "end": "15:15", "room": "Torgersen 1100" },
+    { "manager": "Isaac Nguyen",  "course": "STAT 3274", "days": "MWF", "start": "13:25", "end": "14:15", "room": "Hutcheson 200" },
+    { "manager": "Nate Fowler",   "course": "COMM 2014", "days": "MW",  "start": "15:30", "end": "16:45", "room": "McBryde 100" },
+    { "manager": "Nate Fowler",   "course": "MKTG 3104", "days": "TR",  "start": "11:00", "end": "12:15", "room": "Pamplin 1030" },
+    { "manager": "Maya Ellis",    "course": "BIT 4854",  "days": "TR",  "start": "08:00", "end": "09:15", "room": "Pamplin 2010" },
+    { "manager": "Maya Ellis",    "course": "FIN 4154",  "days": "MWF", "start": "10:10", "end": "11:00", "room": "Pamplin 1040" },
+    { "manager": "Dev Patel",     "course": "CS 2505",   "days": "MWF", "start": "12:20", "end": "13:10", "room": "Torgersen 2150" },
+    { "manager": "Dev Patel",     "course": "MATH 2204", "days": "TR",  "start": "15:30", "end": "16:45", "room": "McBryde 218" }
+  ]
+}
