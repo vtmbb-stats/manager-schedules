@@ -234,8 +234,6 @@
   <nav class="tabs" id="tabs">
     <button class="tab active" data-tab="now">Now</button>
     <button class="tab" data-tab="avail">Find a window</button>
-    <button class="tab" data-tab="mgr">By manager</button>
-    <button class="tab" data-tab="list">All classes</button>
   </nav>
 
   <main id="app"></main>
@@ -367,10 +365,8 @@
     var app=document.getElementById("app");
     if(!state){app.innerHTML='<div class="panel empty"><p class="eyebrow">No schedule</p><p>The schedule file didn’t load. Check your connection and hit Refresh.</p></div>';return;}
     if(!state.managers.length){app.innerHTML='<div class="panel empty"><p class="eyebrow">Nothing scheduled yet</p><p>No managers are in the schedule file yet.</p></div>';return;}
-    if(ui.tab==="now")app.innerHTML=nowView();
-    else if(ui.tab==="avail")app.innerHTML=availView();
-    else if(ui.tab==="mgr")app.innerHTML=mgrDetailView();
-    else app.innerHTML=listView();
+    if(ui.tab==="avail")app.innerHTML=availView();
+    else app.innerHTML=nowView();
     if(ui.scrollGuide){
       var gs=document.getElementById("gscroll");
       if(gs)gs.scrollLeft=+gs.getAttribute("data-scrollto")||0;
@@ -559,60 +555,6 @@
     }).join("")+'</div>';
   }
 
-  /* ---------- BY MANAGER ---------- */
-  function classBlocks(list,lo){
-    return pack(list.map(function(c){return {start:c.start,end:c.end,c:c};})).map(function(it){
-      var c=it.c,m=mgr(c.mgr),top=(c.start-lo)*PPM,h=Math.max((c.end-c.start)*PPM,15),w=100/it._n;
-      return '<div class="cls" style="top:'+top+'px;height:'+h+'px;left:'+(it._c*w)+'%;width:'+(w-1)+'%;background:'+m.color+';color:'+inkOn(m.color)+'">'+
-        '<span class="code">'+esc(c.label||"Class")+'</span><span class="who">'+(c.room?esc(c.room):"")+'</span></div>';
-    }).join("");
-  }
-  function mgrDetailView(){
-    var sorted=state.managers.slice(),m=ui.mgrView?mgr(ui.mgrView):sorted[0];
-    if(!m)return "";
-    ui.mgrView=m.id;
-    var cls=state.classes.filter(function(c){return c.mgr===m.id;});
-    var totalMin=0,perDay={};
-    cls.forEach(function(c){c.days.forEach(function(d){totalMin+=(c.end-c.start);perDay[d]=(perDay[d]||0)+1;});});
-    var busiest=Object.keys(perDay).sort(function(a,b){return perDay[b]-perDay[a];})[0];
-    var earliest=cls.length?Math.min.apply(null,cls.map(function(c){return c.start;})):null;
-    var latest=cls.length?Math.max.apply(null,cls.map(function(c){return c.end;})):null;
-    var b=dayBounds(),lo=b[0],hi=b[1],H=(hi-lo)*PPM;
-    var head='<div class="board-head"><div></div>'+DAYS.map(function(d){return '<div class="dh">'+d[1]+'</div>';}).join("")+'</div>';
-    var cols='<div class="rail" style="height:'+H+'px">'+railHours(lo,hi)+'</div>';
-    DAYKEYS.forEach(function(dk){
-      cols+='<div class="daycol" style="height:'+H+'px;--hourpx:'+(60*PPM)+'px">'+
-        classBlocks(cls.filter(function(c){return c.days.indexOf(dk)>=0;}),lo)+'</div>';
-    });
-    return '<div class="toolbar"><div class="field"><label for="pm">Manager</label><select id="pm" data-act="pick-mgr">'+
-      sorted.map(function(x){return '<option value="'+x.id+'"'+(x.id===m.id?" selected":"")+'>'+esc(x.name)+'</option>';}).join("")+'</select></div></div>'+
-      '<div class="statline">'+
-      '<div><b>'+cls.length+'</b><span>classes</span></div>'+
-      '<div><b>'+Math.floor(totalMin/60)+"h "+(totalMin%60)+'m</b><span>weekly in class</span></div>'+
-      '<div><b>'+(busiest?DAYS.filter(function(d){return d[0]===busiest;})[0][1]:"—")+'</b><span>busiest day</span></div>'+
-      '<div><b>'+(earliest!=null?fmt(earliest):"—")+'</b><span>earliest start</span></div>'+
-      '<div><b>'+(latest!=null?fmt(latest):"—")+'</b><span>latest end</span></div></div>'+
-      '<div class="board-frame"><div class="board-scroll"><div class="board">'+head+'<div class="board-body">'+cols+'</div></div></div></div>';
-  }
-
-  /* ---------- ALL CLASSES (read-only list) ---------- */
-  function listView(){
-    var sorted=state.managers.slice();
-    var groups=sorted.map(function(m){
-      var cls=state.classes.filter(function(c){return c.mgr===m.id;}).sort(function(a,b){return a.start-b.start;});
-      return '<div class="row" style="border-top:0;padding-bottom:2px"><span class="tick" style="background:'+m.color+'"></span>'+
-        '<span class="name grow">'+esc(m.name)+'</span></div>'+
-        (cls.length?cls.map(function(c){
-          return '<div class="row" style="padding-left:14px"><span class="grow"><span class="tag">'+esc(c.label||"Class")+'</span> '+
-            '<span class="mono muted" style="font-size:12px">'+c.days.join("")+' · '+fmt(c.start)+"–"+fmt(c.end)+'</span>'+
-            (c.room?' <span class="muted">'+esc(c.room)+'</span>':"")+'</span></div>';
-        }).join(""):'<div class="row" style="padding-left:14px"><span class="muted" style="font-size:12px">No classes</span></div>');
-    }).join("");
-    return '<div class="panel"><p class="eyebrow">Every manager’s classes'+(state.updated?' · updated '+esc(prettyDate(state.updated)):'')+'</p>'+
-      '<div class="rows">'+groups+'</div></div>'+
-      (state.note?'<p class="muted" style="font-size:12px;margin-top:10px">'+esc(state.note)+'</p>':'');
-  }
-
   /* ---------- events ---------- */
   document.getElementById("tabs").addEventListener("click",function(e){
     var b=e.target.closest(".tab");if(!b)return;
@@ -649,8 +591,7 @@
     }
   });
   document.getElementById("app").addEventListener("change",function(e){
-    if(e.target.id==="seldt"){ui.selDateMs=fromLocalInput(e.target.value).getTime();ui.scrollGuide=true;render();return;}
-    if(e.target.getAttribute("data-act")==="pick-mgr"){ui.mgrView=e.target.value;render();}
+    if(e.target.id==="seldt"){ui.selDateMs=fromLocalInput(e.target.value).getTime();ui.scrollGuide=true;render();}
   });
 
   /* live tick: keep the Now board current without disturbing scroll */
