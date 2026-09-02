@@ -70,9 +70,11 @@ One entry per class meeting pattern. A class that meets MWF is a single entry wi
 | SHANK | Shanks Hall |
 | JCH | Cheatham Hall |
 | GOODW | Goodwin Hall |
-| DAVID | Davidson Hall |
-| HAHN | Hahn Hall |
+| DAV / DAVID | Davidson Hall |
+| HAHN | Hahn Hall (HAHN N = Hahn Hall North) |
 | NCB | New Classroom Building |
+| DER | Derring Hall |
+| STEG | Steger Hall (STEG N = Steger Hall North) |
 
 After editing, commit and push (or edit on github.com) — GitHub Pages redeploys in
 about a minute, and viewers get the new data on their next load.
