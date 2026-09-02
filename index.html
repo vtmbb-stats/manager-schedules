@@ -420,7 +420,7 @@
         (o.c.room?'<span class="muted">'+esc(o.c.room)+'</span>':"")+
         '<span class="rest">til '+fmt(o.c.end)+'</span></div>';
     }).join(""):'<p class="muted" style="font-size:13px;margin:0">'+(dk?"Nobody is in class "+esc(atLabel)+".":"No classes on "+DOWNAME[sel.getDay()]+".")+'</p>';
-    var freeHtml=free.map(function(m){
+    var freeHtml=free.slice().reverse().map(function(m){   /* seniority runs the other way: Richie (top of the board) sits last here */
       var nx=dk?nextClass(m.id,dk,selMin):null;
       var rest=!dk?"":nx?"next "+fmt(nx.start)+" ("+esc(nx.label)+")":"done for the day";
       return '<div class="nrow is-free"><span class="tick" style="background:'+m.color+'"></span>'+
@@ -534,7 +534,7 @@
       free.push(esc(m.name));
     });
     return '<p class="eyebrow">'+dl+' · '+fmt(t)+'–'+fmt(t+30)+'</p><div class="grid2">'+
-      '<div><b class="muted" style="font-size:12px">FREE ('+free.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(free.join(", ")||"—")+'</p></div>'+
+      '<div><b class="muted" style="font-size:12px">FREE ('+free.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(free.reverse().join(", ")||"—")+'</p></div>'+
       '<div><b class="muted" style="font-size:12px">IN CLASS ('+busy.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(busy.join(", ")||"—")+'</p></div></div>'+
       (trans.length?'<p style="margin:12px 0 0"><b style="font-size:12px;color:var(--tight)">NEEDS TRAVEL TIME ('+trans.length+')</b><br><span style="font-size:13px;line-height:1.9">'+trans.join(", ")+'</span></p>':'');
   }
