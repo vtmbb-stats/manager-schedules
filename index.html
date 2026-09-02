@@ -515,13 +515,14 @@
       cols+='<div class="daycol" style="height:'+H+'px;--hourpx:'+(60*PPM)+'px">'+cells+'</div>';
     });
     var detail=ui.sel?slotDetail(ui.sel):'<p class="muted" style="font-size:12.5px;margin:0">Click a slot for who is free, who is in class, and who needs travel time to or from a class. The free count already leaves out anyone within ~30 min of a class (snapped to the half hour).</p>';
-    return chipBar()+finderForm()+
+    return chipBar()+
       '<div class="panel" id="detail" style="margin-bottom:14px">'+detail+'</div>'+
       '<div class="board-frame"><div class="board-scroll"><div class="board">'+head+'<div class="board-body">'+cols+'</div></div></div></div>'+
       '<p class="legend"><span><i style="background:'+heatBg(1)+'"></i>everyone free</span>'+
       '<span><i style="background:'+heatBg(.5)+'"></i>about half</span>'+
       '<span><i style="background:'+heatBg(0)+'"></i>nobody free</span>'+
-      '<span>free count excludes anyone within ~30 min of a class</span></p>';
+      '<span>free count excludes anyone within ~30 min of a class</span></p>'+
+      finderForm();
   }
   function slotDetail(key){
     var p=key.split("@"),dk=p[0],t=+p[1],mid=t+15;
@@ -540,7 +541,7 @@
   function finderForm(){
     var q=ui.q||(ui.q={day:"M",start:14*60,end:19*60,dur:60,need:0});
     var need=q.need||visibleMgrs().length;
-    return '<div class="panel" style="margin-bottom:14px"><p class="eyebrow">Find an open window</p><div class="formrow">'+
+    return '<div class="panel" style="margin-top:14px"><p class="eyebrow">Find an open window</p><div class="formrow">'+
       '<div class="field"><label>Day</label><select data-q="day">'+DAYS.map(function(d){return '<option value="'+d[0]+'"'+(q.day===d[0]?" selected":"")+'>'+d[1]+'</option>';}).join("")+'</select></div>'+
       '<div class="field"><label>From</label><input type="time" data-q="start" value="'+hhmm(q.start)+'"></div>'+
       '<div class="field"><label>To</label><input type="time" data-q="end" value="'+hhmm(q.end)+'"></div>'+
