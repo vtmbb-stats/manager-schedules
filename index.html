@@ -111,8 +111,6 @@
   .nrow .nm{font-weight:500; min-width:96px;}
   .nrow .rest{margin-left:auto; color:var(--muted); font-size:11.5px; font-family:"IBM Plex Mono",monospace;}
   .nrow.is-free .nm{color:var(--muted); font-weight:400;}
-  .nrow.is-soon .nm{color:var(--ink); font-weight:500;}
-  .nrow.is-soon .rest{color:var(--tight);}
   .tag.soon{background:transparent; border:1px solid var(--tight); color:var(--tight);}
   .cell.soon{box-shadow:inset 0 -4px 0 -1px var(--tight);}
 
@@ -402,13 +400,10 @@
     var nowMin=real.getHours()*60+real.getMinutes();
 
     var sorted=state.managers.slice();
-    var inClass=[],free=[],trans=[];
+    var inClass=[],free=[];
     sorted.forEach(function(m){
       var c=dk?classAt(m.id,dk,selMin):null;
-      if(c){inClass.push({m:m,c:c});return;}
-      var tr=transitionInfo(m.id,dk,selMin);
-      if(tr){trans.push({m:m,tr:tr});return;}
-      free.push(m);
+      if(c)inClass.push({m:m,c:c});else free.push(m);
     });
     var atLabel=live?"right now":(DOWNAME[sel.getDay()]+" "+fmt(selMin));
     var inHtml=inClass.length?inClass.map(function(o){
@@ -417,32 +412,24 @@
         (o.c.room?'<span class="muted">'+esc(o.c.room)+'</span>':"")+
         '<span class="rest">til '+fmt(o.c.end)+'</span></div>';
     }).join(""):'<p class="muted" style="font-size:13px;margin:0">'+(dk?"Nobody is in class "+esc(atLabel)+".":"No classes on "+DOWNAME[sel.getDay()]+".")+'</p>';
-    var transHtml=trans.map(function(o){
-      var tr=o.tr, rest=tr.dir==="to"?("class in "+tr.gap+" min"):("out "+tr.gap+" min ago");
-      return '<div class="nrow is-soon"><span class="tick" style="background:'+o.m.color+'"></span>'+
-        '<span class="nm">'+esc(o.m.name)+'</span><span class="tag soon">'+esc(tr.c.label||"Class")+'</span>'+
-        '<span class="rest">'+rest+'</span></div>';
-    }).join("");
     var freeHtml=free.map(function(m){
       var nx=dk?nextClass(m.id,dk,selMin):null;
       var rest=!dk?"":nx?"next "+fmt(nx.start)+" ("+esc(nx.label)+")":"done for the day";
       return '<div class="nrow is-free"><span class="tick" style="background:'+m.color+'"></span>'+
         '<span class="nm">'+esc(m.name)+'</span><span class="rest">'+rest+'</span></div>';
-    }).join("")||'<p class="muted" style="font-size:13px;margin:0">Nobody is fully free.</p>';
+    }).join("")||'<p class="muted" style="font-size:13px;margin:0">Everyone is in class.</p>';
 
     var guide=guideHtml(dk,isToday?nowMin:null,live?null:selMin,live?nowMin:selMin);
     return '<div class="panel"><div class="nowtop">'+
         '<div class="field"><label for="seldt">Show who’s in class at</label>'+
           '<div class="dt-row"><input type="datetime-local" id="seldt" value="'+toLocalInput(sel)+'">'+
           '<button class="btn ghost mini" data-act="now-reset">Now</button></div></div>'+
-        '<div class="nowcount"><b>'+free.length+'</b><span>free</span><span style="opacity:.4">/</span><b>'+trans.length+'</b><span>in transit</span><span style="opacity:.4">/</span><b>'+inClass.length+'</b><span>in class</span></div>'+
+        '<div class="nowcount"><b>'+inClass.length+'</b><span>in class</span><span style="opacity:.4">/</span><b>'+free.length+'</b><span>free</span></div>'+
       '</div>'+
       (dk?'':'<p class="daynote">'+DOWNAME[sel.getDay()]+' — no scheduled classes on weekends.</p>')+
       '<div class="grid2">'+
-        '<div><p class="eyebrow">Free</p><div class="nrows">'+freeHtml+
-          (transHtml?'<div style="margin-top:10px"><p class="eyebrow" style="color:var(--tight)">Heading to / from class · ±'+BUF+' min</p><div class="nrows">'+transHtml+'</div></div>':'')+
-        '</div>'+
         '<div><p class="eyebrow">In class '+esc(atLabel)+'</p><div class="nrows">'+inHtml+'</div></div>'+
+        '<div><p class="eyebrow">Free</p><div class="nrows">'+freeHtml+'</div></div>'+
       '</div></div>'+
       '<div class="guide-wrap">'+guide+
         '<div class="guide-hint">'+
