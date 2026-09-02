@@ -29,6 +29,12 @@
 
     { "manager": "David", "course": "ECON 2005", "days": "MWF", "start": "11:15", "end": "12:05", "room": "Squires Student Center Auditorium" },
     { "manager": "David", "course": "MATH 1025", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Online (Zoom)" },
-    { "manager": "David", "course": "MKTG 3104", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Graduate Life Center at Donaldson Brown" }
+    { "manager": "David", "course": "MKTG 3104", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Graduate Life Center at Donaldson Brown" },
+
+    { "manager": "Isaac", "course": "COMM 4024", "days": "MW",  "start": "14:30", "end": "15:45", "room": "Surge Building 108B" },
+    { "manager": "Isaac", "course": "JMC 3174",  "days": "MW",  "start": "16:00", "end": "17:15", "room": "Center for the Arts 157" },
+    { "manager": "Isaac", "course": "JMC 3184",  "days": "TR",  "start": "09:30", "end": "10:45", "room": "Center for the Arts 153" },
+    { "manager": "Isaac", "course": "JMC 4064",  "days": "TR",  "start": "11:00", "end": "12:15", "room": "McBryde Hall 329" },
+    { "manager": "Isaac", "course": "JMC 4334",  "days": "TR",  "start": "12:30", "end": "13:45", "room": "GBJ 100" }
   ]
 }
