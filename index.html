@@ -112,7 +112,6 @@
   .nrow .rest{margin-left:auto; color:var(--muted); font-size:11.5px; font-family:"IBM Plex Mono",monospace;}
   .nrow.is-free .nm{color:var(--muted); font-weight:400;}
   .tag.soon{background:transparent; border:1px solid var(--tight); color:var(--tight);}
-  .cell.soon{box-shadow:inset 0 -4px 0 -1px var(--tight);}
 
   .guide-wrap{margin-top:16px;}
   .guide-frame{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
@@ -289,18 +288,27 @@
     return state.classes.filter(function(c){return c.mgr===mid&&c.days.indexOf(day)>=0&&c.start>t;})
       .sort(function(a,b){return a.start-b.start;})[0]||null;
   }
-  /* within 30 min of a class start (heading to it) or a class end (just got out) —
-     managers in this window can't be counted on to rebound */
-  var BUF=30;
-  function transitionInfo(id,day,t){
+  /* Heatmap only: ~30 min of travel time around each class, snapped to the
+     half hour (nearest, ties toward the class): a class ending 12:15 frees
+     them at 12:30; ending 12:20 frees them at 1:00. Inside this padded
+     window but outside the class itself, a manager is "in transit". */
+  function paddedRange(c){
+    return [Math.floor((c.start-15)/30)*30, Math.ceil((c.end+15)/30)*30];
+  }
+  function slotStatus(id,day,mid){
     if(!day)return null;
-    var best=null;
+    var inClass=null, transit=null;
     state.classes.forEach(function(c){
       if(c.mgr!==id||c.days.indexOf(day)<0)return;
-      if(c.start>t&&c.start-t<=BUF){ if(!best||c.start-t<best.gap) best={dir:"to",c:c,gap:c.start-t}; }
-      else if(c.end<=t&&t-c.end<=BUF){ if(!best||t-c.end<best.gap) best={dir:"from",c:c,gap:t-c.end}; }
+      if(mid>=c.start&&mid<c.end){ inClass=c; return; }
+      var r=paddedRange(c);
+      if(mid>=r[0]&&mid<r[1]){
+        var dir=mid<c.start?"to":"from", gap=dir==="to"?c.start-mid:mid-c.end;
+        if(!transit||gap<transit.gap) transit={kind:"transit",c:c,dir:dir,gap:gap};
+      }
     });
-    return best;
+    if(inClass)return {kind:"in",c:inClass};
+    return transit;
   }
   function dayBounds(){
     var lo=7*60,hi=20*60;
@@ -496,39 +504,38 @@
       for(var t=lo;t<hi;t+=slot){
         var mid=t+slot/2,fr=0,sn=0;
         ids.forEach(function(id){
-          if(isBusy(id,dk,mid))return;
-          if(transitionInfo(id,dk,mid))sn++;else fr++;
+          var s=slotStatus(id,dk,mid);
+          if(!s)fr++;else if(s.kind==="transit")sn++;
         });
         var key=dk+"@"+t;
-        cells+='<div class="cell'+(ui.sel===key?" sel":"")+(sn?" soon":"")+'" data-slot="'+dk+"|"+t+
-          '" title="'+fr+' free, '+sn+' heading to/from class, '+(total-fr-sn)+' in class" style="top:'+((t-lo)*PPM)+
+        cells+='<div class="cell'+(ui.sel===key?" sel":"")+'" data-slot="'+dk+"|"+t+
+          '" title="'+fr+' free, '+sn+' with travel time, '+(total-fr-sn)+' in class" style="top:'+((t-lo)*PPM)+
           'px;height:'+(slot*PPM)+'px;background:'+heatBg(fr/total)+'">'+fr+"/"+total+'</div>';
       }
       cols+='<div class="daycol" style="height:'+H+'px;--hourpx:'+(60*PPM)+'px">'+cells+'</div>';
     });
-    var detail=ui.sel?slotDetail(ui.sel):'<p class="muted" style="font-size:12.5px;margin:0">Click a slot for who is free, who is in class, and who is heading to / from class (within '+BUF+' min). Cells with an orange underline have someone in transit.</p>';
+    var detail=ui.sel?slotDetail(ui.sel):'<p class="muted" style="font-size:12.5px;margin:0">Click a slot for who is free, who is in class, and who needs travel time to or from a class. The free count already leaves out anyone within ~30 min of a class (snapped to the half hour).</p>';
     return chipBar()+finderForm()+
       '<div class="panel" id="detail" style="margin-bottom:14px">'+detail+'</div>'+
       '<div class="board-frame"><div class="board-scroll"><div class="board">'+head+'<div class="board-body">'+cols+'</div></div></div></div>'+
       '<p class="legend"><span><i style="background:'+heatBg(1)+'"></i>everyone free</span>'+
       '<span><i style="background:'+heatBg(.5)+'"></i>about half</span>'+
       '<span><i style="background:'+heatBg(0)+'"></i>nobody free</span>'+
-      '<span><i style="box-shadow:inset 0 -4px 0 -1px var(--tight);background:var(--surface-2)"></i>some heading to / from class</span></p>';
+      '<span>free count excludes anyone within ~30 min of a class</span></p>';
   }
   function slotDetail(key){
     var p=key.split("@"),dk=p[0],t=+p[1],mid=t+15;
     var dl=DAYS.filter(function(d){return d[0]===dk;})[0][1],free=[],busy=[],trans=[];
     visibleMgrs().forEach(function(m){
-      var c=classAt(m.id,dk,mid);
-      if(c){busy.push(esc(m.name)+' <span class="tag">'+esc(c.label)+'</span>');return;}
-      var tr=transitionInfo(m.id,dk,mid);
-      if(tr){trans.push(esc(m.name)+' <span class="tag soon">'+esc(tr.c.label)+' '+(tr.dir==="to"?"in "+tr.gap+"m":tr.gap+"m ago")+'</span>');return;}
+      var s=slotStatus(m.id,dk,mid);
+      if(s&&s.kind==="in"){busy.push(esc(m.name)+' <span class="tag">'+esc(s.c.label)+'</span>');return;}
+      if(s&&s.kind==="transit"){trans.push(esc(m.name)+' <span class="tag soon">'+esc(s.c.label)+' '+(s.dir==="to"?"before "+fmt(s.c.start):"after "+fmt(s.c.end))+'</span>');return;}
       free.push(esc(m.name));
     });
     return '<p class="eyebrow">'+dl+' · '+fmt(t)+'–'+fmt(t+30)+'</p><div class="grid2">'+
       '<div><b class="muted" style="font-size:12px">FREE ('+free.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(free.join(", ")||"—")+'</p></div>'+
       '<div><b class="muted" style="font-size:12px">IN CLASS ('+busy.length+')</b><p style="font-size:13px;margin:4px 0 0">'+(busy.join(", ")||"—")+'</p></div></div>'+
-      (trans.length?'<p style="margin:12px 0 0"><b style="font-size:12px;color:var(--tight)">HEADING TO / FROM CLASS ('+trans.length+') · within '+BUF+' min</b><br><span style="font-size:13px;line-height:1.9">'+trans.join(", ")+'</span></p>':'');
+      (trans.length?'<p style="margin:12px 0 0"><b style="font-size:12px;color:var(--tight)">NEEDS TRAVEL TIME ('+trans.length+')</b><br><span style="font-size:13px;line-height:1.9">'+trans.join(", ")+'</span></p>':'');
   }
   function finderForm(){
     var q=ui.q||(ui.q={day:"M",start:14*60,end:19*60,dur:60,need:0});
