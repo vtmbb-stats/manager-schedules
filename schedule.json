@@ -1,6 +1,6 @@
 {
   "semester": "Fall 2026",
-  "updated": "2026-09-02",
+  "updated": "2026-09-04",
   "note": "",
   "managers": [
     { "name": "Richie" },
@@ -21,7 +21,7 @@
     { "manager": "Richie", "course": "CMST 3124", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Pamplin Hall 1010" },
     { "manager": "Richie", "course": "MKTG 3134", "days": "TR",  "start": "12:30", "end": "13:45", "room": "Litton-Reaves Hall 280" },
 
-    { "manager": "Nate", "course": "CMST 4714", "days": "MWF", "start": "12:20", "end": "13:10", "room": "McBryde Hall 230" },
+    { "manager": "Nate", "course": "CMST 4714", "days": "MW", "start": "12:20", "end": "13:10", "room": "McBryde Hall 230" },
     { "manager": "Nate", "course": "CMST 3064", "days": "MW",  "start": "14:30", "end": "15:45", "room": "Undergraduate Science Laboratory Building 312" },
     { "manager": "Nate", "course": "MGT 2354",  "days": "TR",  "start": "11:00", "end": "12:15", "room": "Data & Decision Sciences Building 240" },
     { "manager": "Nate", "course": "CMST 3124", "days": "TR",  "start": "12:30", "end": "13:45", "room": "McBryde Hall 238" },
@@ -49,7 +49,6 @@
     { "manager": "Luke", "course": "STAT 4105", "days": "MW",  "start": "16:00", "end": "17:15", "room": "Fralin Hall 002" },
 
     { "manager": "Jackson", "course": "ECON 2005", "days": "MWF", "start": "08:00", "end": "08:50", "room": "New Classroom Building 250" },
-    { "manager": "Jackson", "course": "STAT 3005", "days": "MWF", "start": "12:20", "end": "13:10", "room": "Litton-Reaves Hall 1870" },
     { "manager": "Jackson", "course": "ENGL 1105", "days": "TR",  "start": "09:30", "end": "10:45", "room": "Whittemore Hall 281" },
     { "manager": "Jackson", "course": "FIN 2114",  "days": "TR",  "start": "15:30", "end": "16:45", "room": "Data & Decision Sciences Building 155" },
     { "manager": "Jackson", "course": "ECON 2984", "days": "M",   "start": "18:00", "end": "18:50", "room": "Online (Zoom)" },
