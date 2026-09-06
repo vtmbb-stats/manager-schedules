@@ -24,6 +24,9 @@ The page shows:
   "semester": "Fall 2026",
   "updated": "2026-09-02",          // bump this each edit — shows as "Schedule updated ..."
   "note": "",                        // optional line shown on the All classes tab
+  "breaks": [                        // dates with no classes (university-declared, not deadlines)
+    { "start": "2026-09-07", "end": "2026-09-07", "label": "Labor Day" }
+  ],
   "managers": [
     { "name": "First Last" },        // order here sets each manager's color
     { "name": "Other Name", "color": "#3F6DAB" }   // color optional

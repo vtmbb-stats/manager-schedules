@@ -2,6 +2,13 @@
   "semester": "Fall 2026",
   "updated": "2026-09-06",
   "note": "",
+  "breaks": [
+    { "start": "2026-09-07", "end": "2026-09-07", "label": "Labor Day" },
+    { "start": "2026-10-09", "end": "2026-10-09", "label": "Fall Break" },
+    { "start": "2026-11-21", "end": "2026-11-29", "label": "Thanksgiving Break" },
+    { "start": "2026-12-10", "end": "2026-12-10", "label": "Reading Day" },
+    { "start": "2026-12-11", "end": "2026-12-31", "label": "No Classes (semester over)" }
+  ],
   "managers": [
     { "name": "Richie" },
     { "name": "Baker" },
