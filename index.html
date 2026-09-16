@@ -116,36 +116,37 @@
   .guide-wrap{margin-top:16px;}
   .guide-frame{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
     box-shadow:var(--shadow); overflow:hidden;}
-  .guide-scroll{overflow-x:auto; overflow-y:hidden;}
+  .guide-scroll{overflow-x:auto; overflow-y:auto; max-height:520px;}
   .guide{position:relative;}
   .ghead{display:flex; position:sticky; top:0; z-index:6; background:var(--surface); border-bottom:1px solid var(--line);}
-  .gcorner{position:sticky; left:0; z-index:7; width:136px; flex:none; background:var(--surface);
-    font-family:"Oswald",sans-serif; font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase;
-    display:flex; align-items:center; padding:0 12px; border-right:1px solid var(--line);}
-  .gticks{position:relative; height:30px; flex:none;}
-  .gtick{position:absolute; top:15px; height:15px; border-left:1px solid var(--line);
-    font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--muted); padding-left:4px; white-space:nowrap;}
-  .gtick.hr{top:0; height:30px;}
-  .gbody{position:relative;}
-  .grow2{display:flex;}
-  .gname{position:sticky; left:0; z-index:5; width:136px; flex:none; background:var(--surface);
-    display:flex; align-items:center; gap:7px; padding:0 12px; font-size:12.5px; font-weight:500;
-    border-top:1px solid var(--line); border-right:1px solid var(--line);}
-  .gname .sw{width:4px; align-self:stretch; margin:6px 0; border-radius:2px; flex:none;}
-  .gtrack{position:relative; height:46px; flex:none; border-top:1px solid var(--line);
-    background-image:repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px var(--hr));}
-  .gblock{position:absolute; top:5px; bottom:5px; border-radius:5px; padding:3px 7px; overflow:hidden;
+  .gcorner{position:sticky; left:0; top:0; z-index:7; width:58px; flex:0 0 58px; background:var(--surface);
+    font-family:"Oswald",sans-serif; font-weight:600; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+    display:flex; align-items:center; justify-content:center; text-align:center; height:38px;
+    border-right:1px solid var(--line);}
+  .gmname{flex:1 0 90px; min-width:90px; height:38px; display:flex; align-items:center; gap:6px; padding:0 9px;
+    font-size:12px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    border-left:1px solid var(--line);}
+  .gmname .sw{width:8px; height:8px; border-radius:2px; flex:none;}
+  .gbody{display:flex; position:relative;}
+  .gtimes{position:sticky; left:0; z-index:5; width:58px; flex:0 0 58px; background:var(--surface);
+    border-right:1px solid var(--line);}
+  .gtick{position:absolute; left:0; right:0; border-top:1px solid var(--line);
+    font-family:"IBM Plex Mono",monospace; font-size:9.5px; color:var(--muted); padding:2px 6px 0 0; text-align:right;}
+  .gtick.hr{color:var(--ink); font-weight:500;}
+  .gtrackcol{flex:1 0 90px; min-width:90px; position:relative; border-left:1px solid var(--line);
+    background-image:repeating-linear-gradient(var(--line) 0 1px, transparent 1px var(--rh));}
+  .gblock{position:absolute; left:3px; right:3px; border-radius:5px; padding:3px 7px; overflow:hidden;
     display:flex; flex-direction:column; justify-content:center; border:1px solid rgba(0,0,0,.14);}
   .gblock .gcode{font-family:"IBM Plex Mono",monospace; font-weight:500; font-size:11px; white-space:nowrap;
     overflow:hidden; text-overflow:ellipsis;}
   .gblock .groom{font-size:10px; opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
-  .vline{position:absolute; top:0; bottom:0; width:2px; z-index:4; pointer-events:none;}
-  .vline.now{background:var(--orange);}
-  .vline.sel{border-left:2px dashed var(--mark); width:0;}
-  .vline span{position:absolute; top:2px; left:50%; transform:translateX(-50%);
+  .hline{position:absolute; left:0; right:0; height:2px; z-index:4; pointer-events:none;}
+  .hline.now{background:var(--orange);}
+  .hline.sel{border-top:2px dashed var(--mark); height:0;}
+  .hline span{position:absolute; top:-8px; left:64px;
     font-family:"IBM Plex Mono",monospace; font-size:9px; color:#fff; padding:1px 5px; border-radius:3px; white-space:nowrap;}
-  .vline.now span{background:var(--orange);}
-  .vline.sel span{background:var(--mark);}
+  .hline.now span{background:var(--orange);}
+  .hline.sel span{background:var(--mark);}
   .guide-hint{font-size:11.5px; color:var(--muted); margin-top:9px; display:flex; gap:16px; flex-wrap:wrap;}
   .guide-hint i{display:inline-block; width:14px; height:3px; vertical-align:middle; margin-right:5px;}
 
@@ -254,7 +255,7 @@
   var DOW=[null,"M","T","W","R","F",null];
   var DOWNAME=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   var PAL=["#6E1230","#CF4520","#2E7D57","#3F6DAB","#8A5A2B","#7A4F9E","#B23A3A","#2C7A7A","#9C6B1E","#586B2E","#B4457F","#455A64"];
-  var PPM=0.9, GPX=2.4, NAMEW=136;
+  var PPM=0.9, TIMEW=58, ROWH=40, VPX=ROWH/30, HEADH=38, MCOLMIN=90;
 
   var DATA=null, state=null;
   var ui={tab:"now", hidden:{}, mgrView:null, sel:null, q:null, selDateMs:null, scrollGuide:true};
@@ -398,7 +399,7 @@
     else app.innerHTML=nowView();
     if(ui.scrollGuide){
       var gs=document.getElementById("gscroll");
-      if(gs)gs.scrollLeft=+gs.getAttribute("data-scrollto")||0;
+      if(gs)gs.scrollTop=+gs.getAttribute("data-scrollto")||0;
       ui.scrollGuide=false;
     }
   }
@@ -451,41 +452,49 @@
         '<div class="guide-hint">'+
           (isToday?'<span><i style="background:var(--orange)"></i>current time</span>':'')+
           (!live?'<span><i style="background:var(--mark)"></i>selected time</span>':'')+
-          '<span>Scroll sideways for the rest of the day · each block shows the course and building</span>'+
+          '<span>Scroll down for the rest of the day · each block shows the course and building</span>'+
         '</div></div>';
   }
   function guideHtml(dk,nowMin,selLineMin,anchorMin,dayLabel){
-    var b=dayBounds(),LO=b[0],HI=b[1],W=(HI-LO)*GPX;
-    var ticks="";
-    for(var t=LO;t<=HI;t+=30){var left=(t-LO)*GPX,hr=t%60===0;
-      ticks+='<div class="gtick'+(hr?" hr":"")+'" style="left:'+left+'px">'+(hr?fmtS(t):"")+'</div>';}
-    var rows=state.managers.slice().map(function(m){
+    var b=dayBounds(),LO=b[0],HI=b[1];
+    var rowsN=(HI-LO)/30, H=rowsN*ROWH;
+    var mgrs=state.managers;
+    var minW=TIMEW+mgrs.length*MCOLMIN;
+
+    var heads=mgrs.map(function(m){
+      return '<div class="gmname"><span class="sw" style="background:'+m.color+'"></span>'+esc(m.name)+'</div>';
+    }).join("");
+
+    var times="";
+    for(var t=LO;t<=HI;t+=30){var top=(t-LO)*VPX,hr=t%60===0;
+      times+='<div class="gtick'+(hr?" hr":"")+'" style="top:'+top+'px">'+fmtS(t)+'</div>';}
+
+    var tracks=mgrs.map(function(m){
       var blocks="";
       if(dk){
         pack(state.classes.filter(function(c){return c.mgr===m.id&&c.days.indexOf(dk)>=0;})
           .map(function(c){return {start:c.start,end:c.end,c:c};})).forEach(function(it){
-          var c=it.c,left=(c.start-LO)*GPX,w=Math.max((c.end-c.start)*GPX,30);
+          var c=it.c,top=(c.start-LO)*VPX,h=Math.max((c.end-c.start)*VPX,20);
           blocks+='<div class="gblock" title="'+esc(c.label)+(c.room?" · "+esc(c.room):"")+' · '+fmt(c.start)+'–'+fmt(c.end)+'" '+
-            'style="left:'+left+'px;width:'+(w-2)+'px;background:'+m.color+';color:'+inkOn(m.color)+'">'+
+            'style="top:'+top+'px;height:'+(h-2)+'px;background:'+m.color+';color:'+inkOn(m.color)+'">'+
             '<span class="gcode">'+esc(c.label||"Class")+'</span>'+
             (c.room?'<span class="groom">'+esc(c.room)+'</span>':'')+'</div>';
         });
       }
-      return '<div class="grow2"><div class="gname"><span class="sw" style="background:'+m.color+'"></span>'+esc(m.name)+'</div>'+
-        '<div class="gtrack" style="width:'+W+'px;--hr:'+(60*GPX)+'px">'+blocks+'</div></div>';
+      return '<div class="gtrackcol" style="height:'+H+'px;--rh:'+ROWH+'px">'+blocks+'</div>';
     }).join("");
+
     var lines="";
     if(nowMin!=null&&nowMin>=LO&&nowMin<=HI)
-      lines+='<div class="vline now" style="left:'+(NAMEW+(nowMin-LO)*GPX)+'px"><span>'+fmt(nowMin)+'</span></div>';
+      lines+='<div class="hline now" style="top:'+((nowMin-LO)*VPX)+'px"><span>'+fmt(nowMin)+'</span></div>';
     if(selLineMin!=null&&dk&&selLineMin>=LO&&selLineMin<=HI)
-      lines+='<div class="vline sel" style="left:'+(NAMEW+(selLineMin-LO)*GPX)+'px"><span>'+fmt(selLineMin)+'</span></div>';
-    var scrollTo=Math.max(0,(Math.max(LO,(anchorMin||LO)-60)-LO)*GPX-16);
+      lines+='<div class="hline sel" style="top:'+((selLineMin-LO)*VPX)+'px"><span>'+fmt(selLineMin)+'</span></div>';
+    var scrollTo=Math.max(0,(Math.max(LO,(anchorMin||LO)-60)-LO)*VPX-8);
     var dayName=dayLabel||(dk?DOWNAME[DAYKEYS.indexOf(dk)+1]:"—");
     return '<div class="guide-frame"><div class="guide-scroll" id="gscroll" data-scrollto="'+scrollTo+'">'+
-      '<div class="guide" style="width:'+(NAMEW+W)+'px">'+
-        '<div class="ghead"><div class="gcorner">'+esc(dayName)+'</div>'+
-          '<div class="gticks" style="width:'+W+'px">'+ticks+'</div></div>'+
-        '<div class="gbody">'+rows+lines+'</div>'+
+      '<div class="guide" style="min-width:'+minW+'px">'+
+        '<div class="ghead"><div class="gcorner" title="'+esc(dayName)+'">'+esc(dayName.slice(0,3))+'</div>'+heads+'</div>'+
+        '<div class="gbody"><div class="gtimes" style="height:'+H+'px">'+times+'</div>'+tracks+lines+'</div>'+
       '</div></div></div>';
   }
 
@@ -638,9 +647,9 @@
   /* live tick: keep the Now board current without disturbing scroll */
   setInterval(function(){
     if(ui.tab!=="now"||ui.selDateMs!=null||!DATA)return;
-    var gs=document.getElementById("gscroll"),keep=gs?gs.scrollLeft:null;
+    var gs=document.getElementById("gscroll"),keep=gs?gs.scrollTop:null;
     render();
-    var gs2=document.getElementById("gscroll");if(gs2&&keep!=null)gs2.scrollLeft=keep;
+    var gs2=document.getElementById("gscroll");if(gs2&&keep!=null)gs2.scrollTop=keep;
   },60000);
 
   render();

@@ -1,6 +1,6 @@
 {
   "semester": "Fall 2026",
-  "updated": "2026-09-09",
+  "updated": "2026-09-16",
   "note": "",
   "breaks": [
     { "start": "2026-09-07", "end": "2026-09-07", "label": "Labor Day" },
@@ -18,9 +18,9 @@
     { "name": "Jackson" },
     { "name": "Luke" },
     { "name": "Korey" },
+    { "name": "Tyreese" },
     { "name": "Sean" },
-    { "name": "Jack" },
-    { "name": "Tyreese" }
+    { "name": "Jack" }
   ],
   "classes": [
     { "manager": "Richie", "course": "MKTG 4554", "days": "MWF", "start": "09:05", "end": "09:55", "room": "Hutcheson Hall 310" },
